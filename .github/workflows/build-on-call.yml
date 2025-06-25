@@ -227,7 +227,7 @@ jobs:
             done < manifest.list
           on_retry_command:
             while read manifest; do
-              docker manifest rm $(awk '{print $1}' <<< ${manifest}) || true
+              docker manifest rm "$(echo "$manifest" | awk '{print $1}')" || true
             done < manifest.list
 
       - name: Push Manifests
